@@ -18,14 +18,13 @@ Here's what it does in particular:
 - `docker run -d postgresql:9.2.4`
 
 
-## Persistance
+## Persistence
 
 You can mount the database directory as a volume to persist your data:
 
 `docker run -d -v $HOME/.d_volumes/postgres/:/var/lib/postgresql postgresql:9.2.4`
 
 But before you can do so you first need to create the source folder: `mkdir -p $HOME/.d_volumes/postgres`
-
 
 ## Meta
 
