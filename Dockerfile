@@ -35,4 +35,7 @@ ADD postgresql.conf /etc/postgresql/9.2/main/
 ADD start /start
 RUN chmod 0755 /start
 
+# define a volume for the database
+VOLUME ["/var/lib/postgresql/9.2/main"]
+
 CMD ["/start"]
