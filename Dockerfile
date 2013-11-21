@@ -31,6 +31,10 @@ ADD pg_hba.conf     /etc/postgresql/9.2/main/
 ADD pg_ident.conf   /etc/postgresql/9.2/main/
 ADD postgresql.conf /etc/postgresql/9.2/main/
 
+# install contrib extensions
+WORKDIR /tmp/postgresql-9.2.4/contrib
+RUN make all && make install
+
 # main entry
 ADD start /start
 RUN chmod 0755 /start
