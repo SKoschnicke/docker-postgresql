@@ -30,10 +30,10 @@ WORKDIR /tmp/postgresql-9.2.4/contrib
 RUN make all && make install
 
 # main entry
-ADD start /start
-RUN chmod 0755 /start
+ADD start.sh /start.sh
+RUN chmod 0755 /start.sh
 
 # define a volume for the database
 VOLUME ["/var/lib/postgresql/9.2/main"]
 
-CMD ["/start"]
+CMD ["/start.sh"]
