@@ -21,6 +21,8 @@ fi
 
 trap "echo \"Sending SIGTERM to postgres\"; killall -s SIGTERM postgres" SIGTERM
 
+sysctl -w kernel.shmmax=17179869184
+sysctl -w kernel.shmall=4194304
 su postgres sh -c "$POSTGRES -D $DATADIR -c config_file=$CONF" &
 
 wait $!
