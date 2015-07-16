@@ -1,12 +1,12 @@
-FROM postgresql:9.2
+FROM postgres:9.2
 MAINTAINER Sven Koschnicke <s.koschnicke@gfxpro.com>
 
-# add our own configuration (the sample will be used as base config)
-COPY postgresql.conf /usr/share/postgresql/9.2/postgresql.conf.sample
+RUN apt-get update
+RUN apt-get install -qy build-essential postgresql-server-dev-9.2
+ADD pg_partman_v1.8.7.tar.gz /
 
-# credentials for database superuser
-ENV USERNAME docker
-ENV PASS d0cker
+RUN cd /pg_partman-1.8.7; make install
+RUN rm -rf /pg_partman-1.8.7
+RUN apt-get remove -qy --purge build-essential postgresql-server-dev-9.2
 
-# define a volume for the database
-VOLUME ["/var/lib/postgresql/9.2/main"]
+COPY /init_scripts /docker-entrypoint-initdb.d
