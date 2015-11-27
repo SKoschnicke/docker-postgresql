@@ -29,6 +29,14 @@ ADD postgresql.conf /etc/postgresql/9.2/main/
 WORKDIR /tmp/postgresql-9.2.4/contrib
 RUN make all && make install
 
+# install partman extension
+WORKDIR /tmp/
+RUN curl -L -o /tmp/v1.8.7.tar.gz https://github.com/keithf4/pg_partman/archive/v1.8.7.tar.gz
+RUN tar xzvf v1.8.7.tar.gz
+WORKDIR /tmp/pg_partman-1.8.7
+RUN PATH=$PATH:/usr/local/pgsql/bin make install
+RUN rm -rf /tmp/pg_partman-1.8.7
+
 # main entry
 ADD start.sh /start.sh
 RUN chmod 0755 /start.sh
